@@ -18,7 +18,7 @@ function App() {
   const [sourceLang, setSourceLang] = useState('ko');
   const [apiConfig, setApiConfig] = useState<TranslationApiConfig>({
     provider: 'deepl',
-    apiKey: '',
+    apiKey: import.meta.env.VITE_DEEPL_API_KEY || '',
   });
   const [isTranslating, setIsTranslating] = useState(false);
   const [error, setError] = useState<string | null>(null);
