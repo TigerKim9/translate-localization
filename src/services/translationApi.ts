@@ -37,6 +37,9 @@ export async function translateText(
   throw new Error(`Unsupported translation provider: ${config.provider}`);
 }
 
+// Cloudflare Workers proxy URL
+const DEEPL_PROXY_URL = 'https://translate-localization.kkm9499.workers.dev/';
+
 async function translateWithDeepL(
   text: string,
   sourceLang: string,
@@ -46,12 +49,7 @@ async function translateWithDeepL(
   const sourceCode = DEEPL_LANG_MAP[sourceLang] || sourceLang.toUpperCase();
   const targetCode = DEEPL_LANG_MAP[targetLang] || targetLang.toUpperCase();
 
-  // Determine if it's a free or pro API key
-  const baseUrl = apiKey.endsWith(':fx')
-    ? 'https://api-free.deepl.com/v2/translate'
-    : 'https://api.deepl.com/v2/translate';
-
-  const response = await fetch(baseUrl, {
+  const response = await fetch(DEEPL_PROXY_URL, {
     method: 'POST',
     headers: {
       'Authorization': `DeepL-Auth-Key ${apiKey}`,
@@ -95,11 +93,7 @@ async function translateBatchWithDeepL(
   const sourceCode = DEEPL_LANG_MAP[sourceLang] || sourceLang.toUpperCase();
   const targetCode = DEEPL_LANG_MAP[targetLang] || targetLang.toUpperCase();
 
-  const baseUrl = apiKey.endsWith(':fx')
-    ? 'https://api-free.deepl.com/v2/translate'
-    : 'https://api.deepl.com/v2/translate';
-
-  const response = await fetch(baseUrl, {
+  const response = await fetch(DEEPL_PROXY_URL, {
     method: 'POST',
     headers: {
       'Authorization': `DeepL-Auth-Key ${apiKey}`,
