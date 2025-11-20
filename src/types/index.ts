@@ -4,6 +4,7 @@ export interface TranslationValue {
 }
 
 export interface TranslationItem {
+  id: string;
   key: string;
   translations: Record<string, TranslationValue>;
 }
