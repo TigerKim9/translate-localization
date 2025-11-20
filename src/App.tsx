@@ -307,6 +307,8 @@ function App() {
               key={item.id}
               item={item}
               languages={languages}
+              sourceLang={sourceLang}
+              apiConfig={apiConfig}
               onUpdate={(updated) => updateItem(index, updated)}
               onDelete={() => deleteItem(index)}
             />
