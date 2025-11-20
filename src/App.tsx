@@ -26,6 +26,7 @@ function App() {
 
   const addItem = () => {
     const newItem: TranslationItemType = {
+      id: crypto.randomUUID(),
       key: `new_key_${Date.now()}`,
       translations: languages.reduce((acc, lang) => {
         acc[lang.code] = { text: '', locked: false };
@@ -161,6 +162,7 @@ function App() {
         // Convert to our format
         const newItems: TranslationItemType[] = Object.entries(data).map(
           ([key, translations]) => ({
+            id: crypto.randomUUID(),
             key,
             translations: Object.entries(translations).reduce(
               (acc, [langCode, text]) => {
@@ -302,7 +304,7 @@ function App() {
         ) : (
           items.map((item, index) => (
             <TranslationItem
-              key={`${item.key}-${index}`}
+              key={item.id}
               item={item}
               languages={languages}
               onUpdate={(updated) => updateItem(index, updated)}
