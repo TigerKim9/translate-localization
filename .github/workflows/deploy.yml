@@ -31,6 +31,8 @@ jobs:
 
       - name: Build
         run: bun run build
+        env:
+          VITE_DEEPL_API_KEY: ${{ secrets.VITE_DEEPL_API_KEY }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
